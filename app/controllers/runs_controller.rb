@@ -65,6 +65,6 @@ class RunsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def run_params
-      params.expect(run: [ :started_at, :ended_at, :duration, :stage, :notes, :tumbler_id ])
+      params.expect(run: [ :started_at, :ended_at, :duration, :stage, :notes, :tumbler_id, images: [] ])
     end
 end
