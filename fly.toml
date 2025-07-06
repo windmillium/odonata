@@ -34,7 +34,7 @@ destination = "/data"
 source = "data"
 
 [processes]
-app = "./bin/rails server"
+  app = "./bin/rails server"
 
 [[vm]]
 size = "shared-cpu-1x"

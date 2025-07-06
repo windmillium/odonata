@@ -67,3 +67,5 @@ gem "dockerfile-rails", ">= 1.7", group: :development
 gem "tailwindcss-ruby", "~> 4.1"
 
 gem "tailwindcss-rails", "~> 4.2"
+
+gem "aws-sdk-s3", "~> 1.192", require: false
