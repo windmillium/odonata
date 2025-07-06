@@ -35,7 +35,7 @@ local:
 
 tigris:
   service: S3
-  access_key_id: <%= ENV["AWS_ACCESS_KEY_ID"] %>
-  secret_access_key: <%= ENV["AWS_SECRET_ACCESS_KEY"] %>
-  endpoint: <%= ENV["AWS_ENDPOINT_URL_S3"] %>
-  bucket: <%= ENV["BUCKET_NAME"] %>
+  access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
+  secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
+  endpoint: <%= Rails.application.credentials.dig(:aws, :endpoint_url) %>
+  bucket: <%= Rails.application.credentials.dig(:aws, :bucket_name) %>
