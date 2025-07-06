@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :runs
+  resources :tumblers
   resource :registration, only: %i[new create]
   resource :session
   resources :passwords, param: :token

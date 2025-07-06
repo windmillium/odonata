@@ -1,0 +1,38 @@
+<%= form_with(model: run, class: "contents") do |form| %>
+  <% if run.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(run.errors.count, "error") %> prohibited this run from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% run.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :duration %>
+    <%= form.number_field :duration, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": run.errors[:duration].none?, "border-red-400 focus:outline-red-600": run.errors[:duration].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :stage %>
+    <%= form.text_field :stage, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": run.errors[:stage].none?, "border-red-400 focus:outline-red-600": run.errors[:stage].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :notes %>
+    <%= form.textarea :notes, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": run.errors[:notes].none?, "border-red-400 focus:outline-red-600": run.errors[:notes].any?}] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :tumbler_id %>
+
+    <%= form.select :tumbler_id, Current.user.tumblers.collect { |t| [ t.name, t.id ] } %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
