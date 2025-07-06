@@ -39,3 +39,4 @@ tigris:
   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
   endpoint: <%= Rails.application.credentials.dig(:aws, :endpoint_url) %>
   bucket: <%= Rails.application.credentials.dig(:aws, :bucket_name) %>
+  region: auto
