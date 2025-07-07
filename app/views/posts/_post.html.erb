@@ -9,6 +9,6 @@
     <%= post.body %>
   </p>
 
-  <%= image_tag post.before_image if post.before_image.attached? %>
+  <%= image_tag( post.before_image, class: "img-fluid") if post.before_image.attached? %>
 
 </div>
