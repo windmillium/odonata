@@ -1,26 +1,34 @@
-<div id="<%= dom_id run %>" class="w-full sm:w-auto my-5 space-y-5">
+<div id="<%= dom_id run %>" class="">
   <div>
-    <strong class="block font-medium mb-1">Started at:</strong>
-    <%= run.started_at %>
+    <% if run.started_at %>
+      <strong class="">Started:</strong>
+      <%= time_ago_in_words run.started_at %> ago at <%= local_time(run.started_at) %>
+    <% else %>
+      Run not yet started: 
+      <%= form_for run do |f| -%>
+        <%= f.hidden_field :started_at, value: 1 %>
+        <%= f.submit "Start run" %>
+      <% end -%>
+    <% end %>
   </div>
   <div>
-    <strong class="block font-medium mb-1">Ended at:</strong>
-    <%= run.ended_at %>
+    <strong class="">Ends in</strong>
+    <%= distance_of_time_in_words Time.now.utc, run.started_at + run.duration.days %> at <%= local_time(run.started_at + run.duration.days) %>
   </div>
   <div>
-    <strong class="block font-medium mb-1">Duration:</strong>
-    <%= run.duration %>
+    <strong class="">Duration:</strong>
+    <%= run.duration %> days
   </div>
   <div>
-    <strong class="block font-medium mb-1">Stage:</strong>
+    <strong class="">Stage:</strong>
     <%= run.stage %>
   </div>
   <div>
-    <strong class="block font-medium mb-1">Notes:</strong>
+    <strong class="">Notes:</strong>
     <%= run.notes %>
   </div>
   <div>
-    <strong class="block font-medium mb-1">Tumbler:</strong>
+    <strong class="">Tumbler:</strong>
     <%= run.tumbler_id %>
   </div>
 </div>

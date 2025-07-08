@@ -36,6 +36,10 @@ class RunsController < ApplicationController
 
   # PATCH/PUT /runs/1 or /runs/1.json
   def update
+    if params[:run][:started_at]
+      params[:run][:started_at] = Time.now.utc
+    end
+
     respond_to do |format|
       if @run.update(run_params)
         format.html { redirect_to @run, notice: "Run was successfully updated." }

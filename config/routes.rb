@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   resources :runs
   resources :tumblers
 
-  resources :users
+  resources :users do
+    resources :tumblers
+    resources :runs
+  end
   resource :registration, only: %i[new create]
   resource :session
   resources :passwords, param: :token
