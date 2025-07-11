@@ -1,5 +1,5 @@
 class RunsController < ApplicationController
-  before_action :set_run, only: %i[ show edit update destroy ]
+  before_action :set_run, only: %i[ show edit update destroy end ]
 
   # GET /runs or /runs.json
   def index
@@ -19,6 +19,11 @@ class RunsController < ApplicationController
   def edit
   end
 
+  def end
+    @run.update(ended_at: Time.current)
+    redirect_to :back, notice: "Run was successfully ended."
+  end
+
   # POST /runs or /runs.json
   def create
     @run = Run.new(run_params)
@@ -36,7 +41,7 @@ class RunsController < ApplicationController
 
   # PATCH/PUT /runs/1 or /runs/1.json
   def update
-    if params[:run][:started_at]
+    if params[:run] && params[:run][:started_at]
       params[:run][:started_at] = Time.now.utc
     end
 

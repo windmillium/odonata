@@ -1,23 +1,23 @@
-<div class="container">
-    <div class="col-md-3">
-        <div class="card p-3 py-4">
-            <div class="text-center">
-                <img src="" width="100" class="rounded-circle">
-            </div>
-            <div class="text-center mt-3">
-                <h5 class="mt-2 mb-0"><%= @user.email_address %></h5>
-                <div class="px-4 mt-1">
-                    <p class="fonts">
-                        <%= @user.bio -%>
-                    </p>
-                    <p>
-                        <%= link_to "Tumblers: #{ @user.tumblers.count }", user_tumblers_path(@user) %>
-                    </p>
-                    <p>
-                        <%= link_to "Total runs: #{@user.runs.count}", user_runs_path(@user) %>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<h1 class="mt-2 mb-0"><%= @user.email_address %></h1>
+
+<h2>Current Runs</h2>
+<ul>
+    <% @user.runs.where(ended_at: nil).each do |run| %>
+        <li>
+            <% label = (run.started_at + run.duration.days).past? ? "Ended" : "Ends in" %>
+            <%= run.stage %>: <%= label %> <%= distance_of_time_in_words(run.started_at, run.started_at + run.duration.days) %> from now 
+            <%= form_with model: run, url: end_run_path(run) do |form| %>
+                <%= form.submit "End Now" %>
+            <% end %>
+        </li>
+    <% end %>
+</ul>
+
+<h2>Ended Runs</h2>
+<ul>
+    <% @user.runs.where.not(ended_at: nil).each do |run| %>
+        <li>
+            <%= run.stage %>: Ended <%= time_ago_in_words(run.ended_at) %> ago
+        </li>
+    <% end %>
+</ul>

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :runs
+  resources :runs do
+    member do
+      patch "end"
+    end
+  end
   resources :tumblers
 
   resources :users do
