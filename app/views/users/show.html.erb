@@ -2,12 +2,17 @@
 
 <h2>Current Runs</h2>
 <ul>
+    <li>
+        <%= link_to "New Run", new_run_path %>
+    </li>
     <% @user.runs.where(ended_at: nil).each do |run| %>
         <li>
-            <% label = (run.started_at + run.duration.days).past? ? "Ended" : "Ends in" %>
-            <%= run.stage %>: <%= label %> <%= distance_of_time_in_words(run.started_at, run.started_at + run.duration.days) %> from now 
-            <%= form_with model: run, url: end_run_path(run) do |form| %>
-                <%= form.submit "End Now" %>
+            <%= link_to(run) do %>
+                <% label = (run.started_at + run.duration.days).past? ? "Ended" : "Ends in" %>
+                <%= run.stage %>: <%= label %> <%= distance_of_time_in_words(run.started_at, run.started_at + run.duration.days) %> from now 
+                <%= form_with model: run, url: end_run_path(run) do |form| %>
+                    <%= form.submit "End Now" %>
+                <% end %>
             <% end %>
         </li>
     <% end %>
@@ -17,7 +22,9 @@
 <ul>
     <% @user.runs.where.not(ended_at: nil).each do |run| %>
         <li>
-            <%= run.stage %>: Ended <%= time_ago_in_words(run.ended_at) %> ago
+            <%= link_to(run) do %>
+                <%= run.stage %>: Ended <%= time_ago_in_words(run.ended_at) %> ago
+            <% end %>
         </li>
     <% end %>
 </ul>
