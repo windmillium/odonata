@@ -13,7 +13,9 @@
   </div>
   <div>
     <strong class="">Ends in</strong>
-    <%= distance_of_time_in_words Time.now.utc, run.started_at + run.duration.days %> at <%= local_time(run.started_at + run.duration.days) %>
+    <% if run.started_at && run.duration %>
+      <%= distance_of_time_in_words Time.now.utc, run.started_at + run.duration.days %> at <%= local_time(run.started_at + run.duration.days) %>
+    <% end %>
   </div>
   <div>
     <strong class="">Duration:</strong>
@@ -29,6 +31,6 @@
   </div>
   <div>
     <strong class="">Tumbler:</strong>
-    <%= run.tumbler_id %>
+    <%= run.tumbler.name %>
   </div>
 </div>
