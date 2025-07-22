@@ -67,5 +67,5 @@ gem "dockerfile-rails", ">= 1.7", group: :development
 gem "dartsass-rails"
 gem "bootstrap", "~> 5.3.3"
 
-gem "aws-sdk-s3", "~> 1.192", require: false
+gem "aws-sdk-s3", "~> 1.194", require: false
 gem "local_time"
